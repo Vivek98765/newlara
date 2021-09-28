@@ -1,5 +1,6 @@
 <?php
-
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,14 +12,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', [BlogController::class,'index']);
+
+Route::post('validate-exists', [BlogController::class,'store'])->name('validate.exists');
 
 
-Route::get('insert','StudInsertController@insertform');
-Route::post('create','StudInsertController@insert');
+Route::get('/insert','StudInsertController@index')->name('student form');
+Route::post('/create','StudInsertController@store')->name('student form create');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/send-email', [MailController::class, 'sendEmail']);

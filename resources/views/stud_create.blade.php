@@ -10,36 +10,44 @@
 <body>
 @if (session('status'))
 <div class="alert alert-success" role="alert">
-	<button type="button" class="close" data-dismiss="alert">×</button>
-	{{ session('status') }}
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  {{ session('status') }}
 </div>
 @elseif(session('failed'))
 <div class="alert alert-danger" role="alert">
-	<button type="button" class="close" data-dismiss="alert">×</button>
-	{{ session('failed') }}
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  {{ session('failed') }}
 </div>
 @endif
-<form action="/action_page.php" class="was-validated">
-  <div class="form-group">
-    <label for="uname">Username:</label>
-    <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
-    <div class="valid-feedback">Valid.</div>
-    <div class="invalid-feedback">Please fill out this field.</div>
-  </div>
-  <div class="form-group">
-    <label for="pwd">Password:</label>
-    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
-    <div class="valid-feedback">Valid.</div>
-    <div class="invalid-feedback">Please fill out this field.</div>
-  </div>
-  <div class="form-group form-check">
-    <label class="form-check-label">
-      <input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
-      <div class="valid-feedback">Valid.</div>
-      <div class="invalid-feedback">Check this checkbox to continue.</div>
-    </label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+<form action = "/create" method = "post">
+  <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
+  <table>
+  <tr>
+  <td>First Name</td>
+  <td><input type='text' name='first_name' /></td>
+  <tr>
+  <td>Last Name</td>
+  <td><input type="text" name='last_name'/></td>
+  </tr>
+  <tr>
+  <td>City Name</td>
+  <td>
+  <select name="city_name">
+  <option value="bbsr">Bhubaneswar</option>
+  <option value="cuttack">Cuttack</option>
+  </select></td>
+  </tr>
+  <tr>
+  <td>Email</td>
+  <td><input type="text" name='email'/></td>
+  </tr>
+
+  <tr>
+  <td colspan = '2'>
+  <input type = 'submit' value = "Add student"/>
+  </td>
+  </tr>
+  </table>
 </form>
 </body>
 </html>

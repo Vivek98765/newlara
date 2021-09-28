@@ -1,15 +1,20 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Welcome</title>
+@section('content')
+         <div class="container mt-5">
+        <form action="{{ route('validate.exists') }}" method="post">
+            @csrf
+            <div class="form-group">
+                <input class="form-control" name="title" value="{{ old('title') }}">
+                
+                @if($errors->has('title'))
+                  <span class="text-danger">{{ $errors->first('title') }}</span>
+                @endif
+            </div>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    </head>
-    <body>
-       <h1>hello</h1>
-    </body>
-</html>
+            <div class="d-grid mt-3">
+                <button class="btn btn-success">Submit</button>
+            </div>
+        </form>
+    </div>
+    @endsection
